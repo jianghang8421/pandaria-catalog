@@ -57,7 +57,17 @@ securityContext: {}
 
 resources: {}
 nodeSelector: {}
-affinity: {}
+nodeSelectorWithoutGFD:
+  gpu.cattle.io/type: nvidia
+affinity: 
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: gpu.cattle.io/type
+            operator: NotIn
+            values:
+            - share
 tolerations:
   # This toleration is deprecated. Kept here for backward compatibility
   # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
@@ -66,7 +76,6 @@ tolerations:
   - key: nvidia.com/gpu
     operator: Exists
     effect: NoSchedule
-
 # Mark this pod as a critical add-on; when enabled, the critical add-on
 # scheduler reserves resources for critical add-on pods so that they can
 # be rescheduled after a failure.
@@ -77,6 +86,12 @@ runtimeClassName: null
 
 # Subcharts
 nfd:
+  image:
+    repository: jianghang8421/node-feature-discovery
+    # This should be set to 'IfNotPresent' for released version
+    pullPolicy: IfNotPresent
+    # tag, if defined will use the given image tag, else Chart.AppVersion will be used
+    tag: "v0.11.0"
   nameOverride: node-feature-discovery
   master:
     extraLabelNs:
@@ -108,3 +123,7 @@ nfd:
 gfd:
   enabled: false
   nameOverride: gpu-feature-discovery
+  image:
+    repository: jianghang8421/gpu-feature-discovery
+    pullPolicy: IfNotPresent
+    tag: "v0.6.1"
