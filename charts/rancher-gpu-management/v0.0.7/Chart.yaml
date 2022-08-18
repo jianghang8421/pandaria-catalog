@@ -15,3 +15,9 @@ keywords:
 - management
 - gpu
 icon: https://raw.githubusercontent.com/jianghang8421/gpu-device-plugin-charts/master/nvidia_logo.png
+dependencies:
+  - name: nvidia-device-plugin
+    alias: ndp
+    version: "0.12.2"
+    condition: ndp.enabled
+    repository: https://github.com/nvidia/k8s-device-plugin

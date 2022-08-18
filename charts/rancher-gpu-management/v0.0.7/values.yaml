@@ -1,7 +1,4 @@
 image:
-  nvidiadeviceplugin:
-    repository: cnrancher/k8s-device-plugin
-    tag: "v0.10.0"
   sharedeviceplugin:
     repository: cnrancher/gpu-device-plugin
     tag: "v0.1.0"
@@ -32,3 +29,11 @@ schedulerextender:
 memoryunit: GiB
 global:
   systemDefaultRegistry: ""
+ndp:
+  enabled: true
+  config:
+    map:
+      default: |-
+        version: v1
+        flags:
+          migStrategy: none
