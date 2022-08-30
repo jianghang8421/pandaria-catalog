@@ -29,7 +29,7 @@ schedulerextender:
 memoryunit: GiB
 global:
   systemDefaultRegistry: ""
-ndp:
+nvidia-device-plugin:
   enabled: true
   config:
     map:

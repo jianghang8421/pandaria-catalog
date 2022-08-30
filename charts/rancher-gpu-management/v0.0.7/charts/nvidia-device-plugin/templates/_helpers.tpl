@@ -134,16 +134,7 @@ Check if migStrategy (from all possible configurations) is "none"
 {{- $result -}}
 {{- end }}
 
-{{/*
-Check if an explicit set of configs has been provided or not
-*/}}
-{{- define "nvidia-device-plugin.hasEmbeddedConfigMap" -}}
-{{- $result := true -}}
-{{- if empty .Values.config.map  -}}
-  {{- $result = false -}}
-{{- end -}}
-{{- $result -}}
-{{- end }}
+
 
 {{/*
 Check if there is a ConfigMap in use or not
@@ -156,30 +147,6 @@ Check if there is a ConfigMap in use or not
 {{- $result -}}
 {{- end }}
 
-{{/*
-Get the name of the default configuration
-*/}}
-{{- define "nvidia-device-plugin.hasDefaultConfig" -}}
-{{- $result := "false" -}}
-{{- if .Values.config.default -}}
-  {{- $result = "true"  -}}
-{{- else if not (empty .Values.config.map) -}}
-  {{- if has "named" .Values.config.fallbackStrategies -}}
-    {{- if hasKey .Values.config.map "default" -}}
-      {{- $result = "true" -}}
-    {{- end -}}
-  {{- end -}}
-  {{- if has "single" .Values.config.fallbackStrategies -}}
-    {{- if eq (.Values.config.map | keys | len) 1 -}}
-      {{- $result = "true" -}}
-    {{- end -}}
-  {{- end -}}
-  {{- if has "empty" .Values.config.fallbackStrategies -}}
-    {{- $result = "true" -}}
-  {{- end -}}
-{{- end -}}
-{{- $result -}}
-{{- end }}
 
 {{/*
 Get the name of the configmap to use
@@ -192,17 +159,4 @@ Get the name of the configmap to use
   {{- $result = printf "%s-%s" (include "nvidia-device-plugin.fullname" .) "configs" -}}
 {{- end -}}
 {{- $result -}}
-{{- end -}}
-
-{{/*
-Pod annotations for the plugin and GFD
-*/}}
-{{- define "nvidia-device-plugin.podAnnotations" -}}
-{{- $annotations := deepCopy .local.Values.podAnnotations -}}
-{{- if not (hasKey $annotations "checksum/config") -}}
-  {{- if eq (include "nvidia-device-plugin.hasEmbeddedConfigMap" .root) "true" -}}
-    {{- $_ := set $annotations "checksum/config" (include (print $.root.Template.BasePath "/configmap.yml") .root | sha256sum) -}}
-  {{- end -}}
-{{- end -}}
-{{- toYaml $annotations }}
 {{- end -}}

@@ -40,8 +40,6 @@ spec:
     metadata:
       labels:
         {{- include "nvidia-device-plugin.templateLabels" . | nindent 8 }}
-      annotations:
-        {{- include "nvidia-device-plugin.podAnnotations" (dict "local" . "root" .) | nindent 8 }}
     spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
@@ -194,9 +192,6 @@ spec:
           emptyDir: {}
         {{- end }}
       {{- $nodeSelector := .Values.nodeSelector }}
-      {{- if and (empty $nodeSelector) .Subcharts.gfd }}
-      {{- $nodeSelector = .Subcharts.gfd.Values.nodeSelector }}
-      {{- end }}
       {{- with $nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
