@@ -1,0 +1,12 @@
+categories:
+- GPU Management
+questions:
+- variable: image.defaultScheduler.version
+  default: "v1.23"
+  description: "k8s version"
+  type: enum
+  label: K8S Version
+  group: "Options"
+  options:
+    - v1.23
+    - v1.24

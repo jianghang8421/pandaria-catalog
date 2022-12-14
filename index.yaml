@@ -288,6 +288,36 @@ entries:
     urls:
     - assets/rancher-gpu-management/rancher-gpu-management-0.0.7.tgz
     version: 0.0.7
+  rancher-gpu-sharing:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Rancher GPU Sharing
+      catalog.cattle.io/kube-version: '>= 1.20.0-0'
+      catalog.cattle.io/namespace: cattle-gpu
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+      catalog.cattle.io/release-name: rancher-gpu-sharing
+      catalog.cattle.io/type: cluster-tool
+    apiVersion: v2
+    appVersion: 0.1.1
+    created: "2023-02-17T19:46:22.47139+08:00"
+    description: Provides gpu share for Rancher
+    digest: 097213e16699562ea96eb77c868537649a195fd7b68792d447b33df4ebea5d12
+    home: https://github.com/cnrancher
+    icon: https://raw.githubusercontent.com/jianghang8421/gpu-device-plugin-charts/master/nvidia_logo.png
+    keywords:
+    - sharing
+    - gpu
+    maintainers:
+    - email: hang.jiang@suse.com
+      name: jianghang8421
+    name: rancher-gpu-sharing
+    sources:
+    - https://github.com/cnrancher
+    urls:
+    - assets/rancher-gpu-sharing/rancher-gpu-sharing-0.0.1.tgz
+    version: 0.0.1
   rancher-k8s-auditlog-collector:
   - apiVersion: v2
     appVersion: 1.8.13
