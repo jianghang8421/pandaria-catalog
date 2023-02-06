@@ -292,6 +292,31 @@ entries:
     urls:
     - assets/rancher-gpu-management/rancher-gpu-management-0.1.0.tgz
     version: 0.1.0
+  rancher-gpu-monitoring:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Rancher GPU Monitoring
+      catalog.cattle.io/kube-version: '>= 1.19.0-0'
+      catalog.cattle.io/namespace: cattle-monitoring-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+      catalog.cattle.io/release-name: rancher-gpu-monitoring
+      catalog.cattle.io/type: cluster-tool
+      catalog.cattle.io/upstream-version: 3.1.3
+    apiVersion: v2
+    appVersion: 3.1.3
+    created: "2023-02-10T10:44:51.827956+08:00"
+    description: A Helm chart for DCGM exporter
+    digest: b6e37c9fc33c82c0c0a8f1539cf2e48e8a241a928e7775e3cf5fa88e43ab6ff9
+    home: https://github.com/nvidia/dcgm-exporter/
+    icon: https://assets.nvidiagrid.net/ngc/logos/DCGM.png
+    kubeVersion: '>= 1.10.0-0'
+    name: rancher-gpu-monitoring
+    type: application
+    urls:
+    - assets/rancher-gpu-monitoring/rancher-gpu-monitoring-0.0.1.tgz
+    version: 0.0.1
   rancher-k8s-auditlog-collector:
   - annotations:
       catalog.cattle.io/kube-version: '>= 1.20.0-0'
