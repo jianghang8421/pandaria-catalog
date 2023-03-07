@@ -2,7 +2,7 @@ rancher_min_version: 2.7.0
 categories:
 - GPU Sharing
 questions:
-- variable: image.defaultScheduler.version
+- variable: defaultScheduler.version
   default: "v1.23"
   description: "k8s version"
   type: enum
@@ -10,6 +10,7 @@ questions:
   options:
     - v1.23
     - v1.24
+    - v1.25
 - variable: useRuntimeClass
   default: false
   description: "Use RuntimeClass"
