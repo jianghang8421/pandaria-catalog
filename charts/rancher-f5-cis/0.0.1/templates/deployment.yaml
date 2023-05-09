@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-bigip-ctlr-deployment
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-bigip-ctlr-deployment
+  template:
+    metadata:
+      labels:
+        release: {{ .Release.Name }}
+        app: k8s-bigip-ctlr-deployment
+    spec:
+{{- if .Values.affinity }}
+      affinity:
+{{ toYaml .Values.affinity | indent 8 }}
+{{- end }}
+{{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range $pullSecret := .Values.image.pullSecrets }}
+        - name: {{ $pullSecret }}
+      {{- end }}
+{{- end }}
+      serviceAccount: bigip-ctlr
+      serviceAccountName: bigip-ctlr
+      containers:
+      - name: k8s-bigip-ctlr
+        image: {{ template "system_default_registry" . }}{{.Values.image.repository}}:{{.Values.image.tag}}
+        {{- if .Values.podSecurityContext }}
+          securityContext:
+{{ toYaml .Values.podSecurityContext | indent 12 }}
+        {{- end }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 15
+        volumeMounts:
+        - name: bigip-creds
+          mountPath: "/tmp/creds"
+          readOnly: true
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+        - /app/bin/k8s-bigip-ctlr
+        args:
+        - --credentials-directory
+        - /tmp/creds
+        {{- $ns := .Values.args.namespaces }}
+        {{- range $key, $value := .Values.args }}
+        {{- if eq $key "namespaces" }}
+        {{- range $ns}}
+        - --namespace={{ . }}
+        {{- end }}
+        {{- else }}
+        - --{{ $key | replace "_" "-"}}={{ $value }}
+        {{- end }}
+        {{- end }}
+{{- if ne .Values.network.poolMemberType "" }}
+  {{- if ne .Values.network.poolMemberType "none" }}
+        - "--pool-member-type={{.Values.network.poolMemberType}}"
+  {{- end }}
+{{- end }}
+{{- if .Values.network.flannelName }}
+            - "--flannel-name={{.Values.network.flannelName}}"
+{{- end }}
+{{- if .Values.ipam.enable }}
+            - "--ipam=true"
+{{- end }}
+        resources:
+          limits:
+            cpu: {{ .Values.limits_cpu | default "100m" }}
+            memory: {{ .Values.limits_memory | default "512Mi" }}
+          requests:
+            cpu: {{ .Values.requests_cpu | default "100m" }}
+            memory: {{ .Values.requests_memory | default "512Mi" }}
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+{{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 6}}
+{{- end }}
+      volumes:
+      - name: bigip-creds
+        secret:
+          secretName: bigip-login
