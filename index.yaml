@@ -567,6 +567,66 @@ entries:
     urls:
     - assets/rancher-cce-operator-crd/rancher-cce-operator-crd-103.0.0+up0.4.2.tgz
     version: 103.0.0+up0.4.2
+  rancher-f5-cis:
+  - annotations:
+      catalog.cattle.io/auto-install: rancher-f5-cis-crd=match
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Rancher F5 CIS
+      catalog.cattle.io/kube-version: '>= 1.20.0-0'
+      catalog.cattle.io/namespace: cattle-f5
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+      catalog.cattle.io/release-name: rancher-f5-cis
+      catalog.cattle.io/type: cluster-tool
+    apiVersion: v2
+    appVersion: 2.13.1
+    created: "2024-03-21T14:20:20.338696+08:00"
+    description: F5 CIS
+    digest: c541d852a7e5bcc50b87761a1a33f85693d8245a0524594068efcd40ae71cd1d
+    home: https://github.com/F5Networks/k8s-bigip-ctlr
+    icon: https://cdn.f5.com/websites/support/assets/images/logo.svg
+    keywords:
+    - f5
+    - bigip
+    maintainers:
+    - email: hang.jiang@suse.com
+      name: jianghang8421
+    name: rancher-f5-cis
+    sources:
+    - https://github.com/F5Networks/k8s-bigip-ctlr
+    urls:
+    - assets/rancher-f5-cis/rancher-f5-cis-0.0.1.tgz
+    version: 0.0.1
+  rancher-f5-cis-crd:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Rancher F5 CIS CRD
+      catalog.cattle.io/hidden: "true"
+      catalog.cattle.io/kube-version: '>= 1.20.0-0'
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0'
+      catalog.cattle.io/release-name: rancher-f5-cis-crd
+    apiVersion: v2
+    appVersion: 2.8.1
+    created: "2024-03-21T14:20:20.339126+08:00"
+    description: F5 CIS CRD
+    digest: 5631a94638ebc5eb1099d8e5610d7ec64aa6028e3db3b4bacc3c7e2042913238
+    home: https://github.com/F5Networks/k8s-bigip-ctlr
+    icon: https://cdn.f5.com/websites/support/assets/images/logo.svg
+    keywords:
+    - f5
+    - bigip
+    maintainers:
+    - email: hang.jiang@suse.com
+      name: jianghang8421
+    name: rancher-f5-cis-crd
+    sources:
+    - https://github.com/F5Networks/k8s-bigip-ctlr
+    urls:
+    - assets/rancher-f5-cis-crd/rancher-f5-cis-crd-0.0.1.tgz
+    version: 0.0.1
   rancher-gpu-monitoring:
   - annotations:
       catalog.cattle.io/certified: rancher
