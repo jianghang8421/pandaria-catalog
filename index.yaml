@@ -1,5 +1,39 @@
 apiVersion: v1
 entries:
+  gha-runner-scale-set:
+  - apiVersion: v2
+    appVersion: 0.9.3
+    created: "2024-08-13T16:51:52.978203+08:00"
+    description: A Helm chart for deploying an AutoScalingRunnerSet
+    digest: 85ba615e348ae92ed530d5d4ec10195e6a5effbc7b4d709c0b8765935eaf5655
+    home: https://github.com/actions/actions-runner-controller
+    maintainers:
+    - name: actions
+      url: https://github.com/actions
+    name: gha-runner-scale-set
+    sources:
+    - https://github.com/actions/actions-runner-controller
+    type: application
+    urls:
+    - assets/gha-runner-scale-set/gha-runner-scale-set-0.9.3.tgz
+    version: 0.9.3
+  gha-runner-scale-set-controller:
+  - apiVersion: v2
+    appVersion: 0.9.3
+    created: "2024-08-13T16:51:53.08571+08:00"
+    description: A Helm chart for install actions-runner-controller CRD
+    digest: 523ec4e0f554903d6ae4e68820a5e9845b833f5b4349d007f1e8f2efd0512c7d
+    home: https://github.com/actions/actions-runner-controller
+    maintainers:
+    - name: actions
+      url: https://github.com/actions
+    name: gha-runner-scale-set-controller
+    sources:
+    - https://github.com/actions/actions-runner-controller
+    type: application
+    urls:
+    - assets/gha-runner-scale-set-controller/gha-runner-scale-set-controller-0.9.3.tgz
+    version: 0.9.3
   pandaria-alerting-drivers:
   - annotations:
       catalog.cattle.io/display-name: Pandaria Alerting Drivers
