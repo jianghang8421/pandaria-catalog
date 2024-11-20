@@ -1,0 +1,11 @@
+--- charts-original/templates/scheduler/deployment.yaml
++++ charts/templates/scheduler/deployment.yaml
+@@ -33,7 +33,7 @@
+       containers:
+       {{- if .Values.scheduler.kubeScheduler.enabled }}
+         - name: kube-scheduler
+-          image: {{ .Values.scheduler.kubeScheduler.image }}:{{ .Capabilities.KubeVersion.Version }}
++          image: {{ .Values.scheduler.kubeScheduler.image }}:{{ include "resolvedKubeSchedulerTag" . }}
+           imagePullPolicy: {{ .Values.scheduler.kubeScheduler.imagePullPolicy | quote }}
+           command:
+             - kube-scheduler

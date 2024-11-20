@@ -1,5 +1,23 @@
 apiVersion: v1
 entries:
+  hami-webui:
+  - apiVersion: v2
+    appVersion: 1.0.3
+    created: "2024-11-20T10:48:54.12097+08:00"
+    dependencies:
+    - condition: dcgm-exporter.enabled
+      name: dcgm-exporter
+      repository: file://./charts/dcgm-exporter
+    - condition: kube-prometheus-stack.enabled
+      name: kube-prometheus-stack
+      repository: file://./charts/kube-prometheus-stack
+    description: A Helm chart for Kubernetes
+    digest: b0757c017487f0aca3c913433d89a8506644b674a4404fff0d5388c0dbd0df53
+    name: hami-webui
+    type: application
+    urls:
+    - assets/hami-webui/hami-webui-103.0.0+up1.0.3.tgz
+    version: 103.0.0+up1.0.3
   pandaria-alerting-drivers:
   - annotations:
       catalog.cattle.io/display-name: Pandaria Alerting Drivers
@@ -817,6 +835,37 @@ entries:
     urls:
     - assets/rancher-gpu-sharing/rancher-gpu-sharing-0.0.1.tgz
     version: 0.0.1
+  rancher-hami:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Rancher HAMi
+      catalog.cattle.io/kube-version: '>= 1.25.0-0'
+      catalog.cattle.io/namespace: hami
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux
+      catalog.cattle.io/rancher-version: '>= 2.8.8-0'
+      catalog.cattle.io/release-name: rancher-hami
+    apiVersion: v2
+    appVersion: 2.4.1
+    created: "2024-12-16T00:03:14.36462+08:00"
+    dependencies:
+    - condition: hami-webui.enabled
+      name: hami-webui
+      repository: file://./charts/hami-webui
+    description: Heterogeneous AI Computing Virtualization Middleware
+    digest: 3328513c156de44f86055e6842599c9f7aebeb9a317d2703ba0e98cb68e88053
+    keywords:
+    - vgpu
+    - gpu
+    kubeVersion: '>= 1.25.0'
+    maintainers:
+    - email: hang.jiang@suse.com
+      name: jianghang8421
+    name: rancher-hami
+    type: application
+    urls:
+    - assets/rancher-hami/rancher-hami-103.0.0+up2.4.1.tgz
+    version: 103.0.0+up2.4.1
   rancher-k8s-auditlog-collector:
   - annotations:
       catalog.cattle.io/kube-version: '>= 1.20.0-0'

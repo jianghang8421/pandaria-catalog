@@ -1,0 +1,16 @@
+--- charts-original/values.yaml
++++ charts/values.yaml
+@@ -148,3 +148,13 @@
+       - huawei.com/Ascend910B-memory
+       - huawei.com/Ascend310P
+       - huawei.com/Ascend310P-memory
++
++hami-webui:
++  enabled: true
++  image:
++    frontend:
++      repository: liuyan/hami-webui-fe-oss
++      tag: "v1.0.3-fix"
++  externalPrometheus:
++    enabled: true
++    address: "http://rancher-monitoring-prometheus.cattle-monitoring-system.svc.cluster.local:9090"
